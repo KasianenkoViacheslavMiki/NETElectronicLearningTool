@@ -1,0 +1,26 @@
+﻿<UserControl x:Class="NETElectronicLearningTool.UserControls.Settings"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1032.228">
+    <Grid Background="AliceBlue" Margin="5,5,5,10">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Настройки матеріалів" HorizontalAlignment="Center" Margin="0,10,0,178" Height="30"/>
+        <Label Content="Розмір символів" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="SizeFont" HorizontalAlignment="Left" Margin="120,41,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="SizeFont_SelectionChanged"/>
+        <Label Content="Колір символів" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="ColorFont" HorizontalAlignment="Left" Margin="120,78,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ColorFont_SelectionChanged"/>
+        <Label Content="Колір полотна" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
+        <ComboBox Name="ColorBackground" HorizontalAlignment="Left" Margin="120,113,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ColorBackground_SelectionChanged"/>
+    </Grid>
+</UserControl>

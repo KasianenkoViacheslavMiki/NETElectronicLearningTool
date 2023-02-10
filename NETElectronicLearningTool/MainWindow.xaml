@@ -3,14 +3,85 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:NETElectronicLearningTool"
+        xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
         mc:Ignorable="d"
         xml:lang="en-US"
-        Title="MainMenu" Height="450" Width="800">
-    <Grid>
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Height="602" Width="1090"
+        Background="#6d429c"
+        >
+
+    <Grid x:Name="GridWindow" MouseDown="Grid_MouseDown">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="110">
+            </RowDefinition>
+            <RowDefinition Height="30">
+            </RowDefinition>
+            <RowDefinition Name="Place" Height="462">
+            </RowDefinition>
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="701*"/>
-            <ColumnDefinition Width="99*"/>
+            <ColumnDefinition>
+            </ColumnDefinition>
         </Grid.ColumnDefinitions>
+        <Grid Background="#47266b">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/NET_Core_Logo.svg.png"/>
+
+        </Grid>
+        <Grid Background="#5c2d91" Grid.Row="1" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="Material" Text="Матеріал"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseLeftButtonDown="Material_MouseLeftButtonDown">
+            </TextBlock>
+            <TextBlock x:Name="Training" Text="Тренування"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseLeftButtonDown="Training_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Test" Text="Тестування"
+                       Grid.Column="2"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseLeftButtonDown="Test_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Setting" Text="Настройки"
+                       Grid.Column="3"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseLeftButtonDown="Setting_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Avtor" Text="Про автора"
+                       Grid.Column="4"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseLeftButtonDown="Avtor_MouseLeftButtonDown"/>
+        </Grid>
+        <local:Teach x:Name="WindowTeach" Grid.Row="2" />
     </Grid>
 </Window>
