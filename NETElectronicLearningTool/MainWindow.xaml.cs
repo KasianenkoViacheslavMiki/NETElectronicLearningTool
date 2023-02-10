@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NETElectronicLearningTool.UserControls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,11 @@ namespace NETElectronicLearningTool
     /// </summary>
     public partial class MainWindow : Window
     {
+        UserControl subWindow;
         public MainWindow()
         {
             InitializeComponent();
+            subWindow = WindowTeach;
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -35,6 +38,13 @@ namespace NETElectronicLearningTool
 
         private void Material_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!(subWindow is Teach))
+            {
+                GridWindow.Children.Remove(subWindow);
+                subWindow = new Teach();
+                subWindow.SetValue(Grid.RowProperty, 3);
+                GridWindow.Children.Add(subWindow);
+            }
             //Міняє вікно на викладання матеріалу
         }
 
@@ -55,6 +65,13 @@ namespace NETElectronicLearningTool
 
         private void Setting_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            if (!(subWindow is Settings))
+            {
+                GridWindow.Children.Remove(subWindow);
+                subWindow = new Settings();
+                subWindow.SetValue(Grid.RowProperty, 3);
+                GridWindow.Children.Add(subWindow);
+            }
             //Міняє вікно на настройки
         }
     }

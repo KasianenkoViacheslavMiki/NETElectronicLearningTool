@@ -12,13 +12,13 @@
         Background="#6d429c"
         >
 
-    <Grid MouseDown="Grid_MouseDown">
+    <Grid x:Name="GridWindow" MouseDown="Grid_MouseDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="110">
             </RowDefinition>
             <RowDefinition Height="30">
             </RowDefinition>
-            <RowDefinition Height="462">
+            <RowDefinition Name="Place" Height="462">
             </RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -77,6 +77,7 @@
                        HorizontalAlignment="Center"
                        FontSize="18" MouseLeftButtonDown="Setting_MouseLeftButtonDown"/>
         </Grid>
-        <local:Teach Grid.Row="2" />
+        <local:Teach x:Name="WindowTeach" Grid.Row="2" />
+        
     </Grid>
 </Window>
