@@ -76,8 +76,12 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="18" MouseLeftButtonDown="Setting_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Avtor" Text="Про автора"
+                       Grid.Column="4"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseLeftButtonDown="Avtor_MouseLeftButtonDown"/>
         </Grid>
         <local:Teach x:Name="WindowTeach" Grid.Row="2" />
-        
     </Grid>
 </Window>

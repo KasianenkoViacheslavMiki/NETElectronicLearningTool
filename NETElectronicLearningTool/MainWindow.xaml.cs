@@ -74,5 +74,16 @@ namespace NETElectronicLearningTool
             }
             //Міняє вікно на настройки
         }
+
+        private void Avtor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!(subWindow is Avtor))
+            {
+                GridWindow.Children.Remove(subWindow);
+                subWindow = new Avtor();
+                subWindow.SetValue(Grid.RowProperty, 3);
+                GridWindow.Children.Add(subWindow);
+            }
+        }
     }
 }
