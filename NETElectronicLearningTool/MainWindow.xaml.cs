@@ -24,5 +24,38 @@ namespace NETElectronicLearningTool
         {
             InitializeComponent();
         }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void Material_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Міняє вікно на викладання матеріалу
+        }
+
+        private void Test_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Міняє вікно на тестування
+        }
+
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+
+        private void Training_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Міняє вікно на тренування
+        }
+
+        private void Setting_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Міняє вікно на настройки
+        }
     }
 }
