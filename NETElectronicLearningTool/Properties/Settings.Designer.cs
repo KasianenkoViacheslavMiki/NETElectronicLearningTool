@@ -22,5 +22,77 @@ namespace NETElectronicLearningTool.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public string ColorFont {
+            get {
+                return ((string)(this["ColorFont"]));
+            }
+            set {
+                this["ColorFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public string SizeFont {
+            get {
+                return ((string)(this["SizeFont"]));
+            }
+            set {
+                this["SizeFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public string DefaultSize {
+            get {
+                return ((string)(this["DefaultSize"]));
+            }
+            set {
+                this["DefaultSize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Black")]
+        public string DefaultColorFont {
+            get {
+                return ((string)(this["DefaultColorFont"]));
+            }
+            set {
+                this["DefaultColorFont"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public string DefaultBackgroundTextBox {
+            get {
+                return ((string)(this["DefaultBackgroundTextBox"]));
+            }
+            set {
+                this["DefaultBackgroundTextBox"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public string BackgroundTextBox {
+            get {
+                return ((string)(this["BackgroundTextBox"]));
+            }
+            set {
+                this["BackgroundTextBox"] = value;
+            }
+        }
     }
 }

@@ -29,7 +29,6 @@ namespace NETElectronicLearningTool.UserControls
         public Teach()
         {
             controllerArticle = new ControllerArticle();
-
             
             getMaterialOfTeach = new RepositoryArticle(new LearningToolContext());
             
@@ -38,8 +37,24 @@ namespace NETElectronicLearningTool.UserControls
             InitializeData();
 
             InitializeEvent();
+
+            InitializeSettingData();
         }
 
+        private void InitializeSettingData()
+        {
+            SolidColorBrush brush = (SolidColorBrush)new BrushConverter().ConvertFromString(Properties.Settings.Default.BackgroundTextBox);
+            textPage.Background = brush;
+
+            if (!Int32.TryParse(Properties.Settings.Default.SizeFont,out int sizeFont))
+            {
+                MessageBox.Show("Can`t convert setting", "Error Setting", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
+            }
+            textPage.FontSize = sizeFont;
+
+            brush = (SolidColorBrush)new BrushConverter().ConvertFromString(Properties.Settings.Default.ColorFont);
+            textPage.Foreground = brush;
+        }
         private async void InitializeData()
         {
             var list = await getMaterialOfTeach.GetGuidAndTitleAllArticles();

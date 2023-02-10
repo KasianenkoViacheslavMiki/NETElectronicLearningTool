@@ -7,17 +7,17 @@
              xmlns:Accessibility="clr-namespace:Accessibility;assembly=Accessibility" x:Class="NETElectronicLearningTool.UserControls.Teach"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1032.228">
-    <Grid Background="AliceBlue" Margin="5,5,-47,10">
+    <Grid Background="AliceBlue" Margin="5,5,5,10">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="600"/>
+            <ColumnDefinition Width="580"/>
             <ColumnDefinition/>
 
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="textPage" Grid.Column="1" Margin="5,5,5,5" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" IsReadOnly="True"/>
-        <Image x:Name="imagePage" Grid.Column = "2" HorizontalAlignment="Left" Height="331" Margin="10,35,0,0" VerticalAlignment="Top" Width="358" Stretch="Fill" />
+        <TextBox x:Name="textPage" Grid.Column="1" FontSize="14" Margin="5,5,5,5" ScrollViewer.CanContentScroll="True" TextWrapping="Wrap" IsReadOnly="True"/>
+        <Image x:Name="imagePage" Grid.Column = "2" HorizontalAlignment="Left" Height="331" Margin="10,35,0,0" VerticalAlignment="Top" Width="315" Stretch="Fill" />
         <Button Grid.Column = "2" x:Name="Back" Content="Назад" HorizontalAlignment="Left" Margin="98,392,0,0" VerticalAlignment="Top" Click="Back_Click"/>
-        <Button Grid.Column = "2" x:Name="Forward" Content="Вперед" HorizontalAlignment="Left" Margin="267,392,0,0" VerticalAlignment="Top" Click="Forward_Click"/>
+        <Button Grid.Column = "2" x:Name="Forward" Content="Вперед" HorizontalAlignment="Left" Margin="232,392,0,0" VerticalAlignment="Top" Click="Forward_Click"/>
         <Label x:Name="numberPageArticle" Grid.Column="2" Content="0/0" HorizontalAlignment="Center" Margin="0,389,0,0" VerticalAlignment="Top"/>
         <TreeView x:Name="TreeArticle" MouseDoubleClick="TreeArticle_MouseDoubleClick">
 
