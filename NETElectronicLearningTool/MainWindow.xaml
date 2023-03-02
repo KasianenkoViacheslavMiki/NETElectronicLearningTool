@@ -53,6 +53,10 @@
                 </ColumnDefinition>
                 <ColumnDefinition>
                 </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
+                <ColumnDefinition>
+                </ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="Material" Text="Матеріал"
@@ -81,6 +85,16 @@
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        FontSize="18" MouseLeftButtonDown="Avtor_MouseLeftButtonDown"/>
+            <TextBlock x:Name="Dictionary" Text="Словник"
+                       Grid.Column="5"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" />
+            <TextBlock x:Name="Graf" Text="Графік"
+                       Grid.Column="6"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" />
         </Grid>
         <local:Teach x:Name="WindowTeach" Grid.Row="2" />
     </Grid>

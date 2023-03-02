@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="NETElectronicLearningTool.UserControls.Dictionary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="1032.228">
+    <Grid Name="GridDictionary">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40">
+                
+            </RowDefinition>
+            <RowDefinition>
+
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition>
+                    
+                </ColumnDefinition>
+                <ColumnDefinition>
+
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="DictionaryTable" Text="Таблиця словника"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseRightButtonDown="DictionaryTable_MouseRightButtonDown" />
+            <TextBlock x:Name="Dictionary" Text="Словник"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18" MouseRightButtonDown="Dictionary_MouseRightButtonDown" />
+        </Grid>
+    </Grid>
+</UserControl>
