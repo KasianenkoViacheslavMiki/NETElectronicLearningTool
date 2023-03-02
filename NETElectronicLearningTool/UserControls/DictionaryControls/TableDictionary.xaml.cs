@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NETElectronicLearningTool.EF.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,14 @@ namespace NETElectronicLearningTool.UserControls.DictionaryControls
     /// </summary>
     public partial class TableDictionary : UserControl
     {
-        public TableDictionary()
+        public TableDictionary(IEnumerable<MethodDiscription> _methodDiscriptions)
         {
             InitializeComponent();
+            TableMethod.ItemsSource = _methodDiscriptions.Select(x=> new {
+                x.NameClass,
+                x.NameFunction,
+                x.DiscriptionFunction,
+            });
         }
     }
 }

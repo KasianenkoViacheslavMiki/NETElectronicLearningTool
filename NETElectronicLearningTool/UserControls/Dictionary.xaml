@@ -29,12 +29,12 @@
                        Grid.Column="0"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseRightButtonDown="DictionaryTable_MouseRightButtonDown" />
-            <TextBlock x:Name="Dictionary" Text="Словник"
+                       FontSize="18" MouseLeftButtonDown="DictionaryTable_MouseLeftButtonDown" />
+            <TextBlock x:Name="Dictionarys" Text="Словник"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseRightButtonDown="Dictionary_MouseRightButtonDown" />
+                       FontSize="18" MouseLeftButtonDown="Dictionary_MouseLeftButtonDown" />
         </Grid>
     </Grid>
 </UserControl>

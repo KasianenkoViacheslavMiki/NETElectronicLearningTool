@@ -89,12 +89,12 @@
                        Grid.Column="5"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" />
+                       FontSize="18" MouseLeftButtonDown="Dictionary_MouseLeftButtonDown" />
             <TextBlock x:Name="Graf" Text="Графік"
                        Grid.Column="6"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" />
+                       FontSize="18" MouseLeftButtonDown="Graf_MouseLeftButtonDown" />
         </Grid>
         <local:Teach x:Name="WindowTeach" Grid.Row="2" />
     </Grid>

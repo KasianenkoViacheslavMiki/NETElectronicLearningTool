@@ -1,4 +1,7 @@
-﻿using NETElectronicLearningTool.UserControls.DictionaryControls;
+﻿using NETElectronicLearningTool.EF;
+using NETElectronicLearningTool.EF.Model;
+using NETElectronicLearningTool.Interface;
+using NETElectronicLearningTool.UserControls.DictionaryControls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,29 +27,43 @@ namespace NETElectronicLearningTool.UserControls
     {
         UserControl subWindow;
 
+        IGetDictionary getDictionary;
+
+        IEnumerable<MethodDiscription> methodDiscriptions;
+
         public Dictionary()
         {
             InitializeComponent();
+
+            getDictionary = new RepositoryDictionary(new LearningToolContext());
+
             subWindow = new UserControl();
+            
+            InitializeData();
         }
 
-        private void DictionaryTable_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private async void InitializeData()
+        {
+            methodDiscriptions = await getDictionary.GetDictionaryOfFunctions();
+        }
+
+        private void DictionaryTable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!(subWindow is TableDictionary))
             {
                 GridDictionary.Children.Remove(subWindow);
-                subWindow = new TableDictionary();
+                subWindow = new TableDictionary(methodDiscriptions);
                 subWindow.SetValue(Grid.RowProperty, 1);
                 GridDictionary.Children.Add(subWindow);
             }
         }
 
-        private void Dictionary_MouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        private void Dictionary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (!(subWindow is LookingDictionary))
             {
                 GridDictionary.Children.Remove(subWindow);
-                subWindow = new LookingDictionary();
+                subWindow = new LookingDictionary(methodDiscriptions);
                 subWindow.SetValue(Grid.RowProperty, 1);
                 GridDictionary.Children.Add(subWindow);
             }

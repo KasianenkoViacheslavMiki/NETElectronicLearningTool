@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 
 namespace NETElectronicLearningTool.EF.Model
 {
-    public class DictionaryOfFunctions
+    public class MethodDiscription
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
+        public string? NameClass { get; set; }
         public string? NameFunction { get; set; }
         public string? DiscriptionFunction { get; set; }
     }

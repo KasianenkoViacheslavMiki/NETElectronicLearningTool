@@ -85,5 +85,27 @@ namespace NETElectronicLearningTool
                 GridWindow.Children.Add(subWindow);
             }
         }
+
+        private void Dictionary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!(subWindow is Dictionary))
+            {
+                GridWindow.Children.Remove(subWindow);
+                subWindow = new Dictionary();
+                subWindow.SetValue(Grid.RowProperty, 3);
+                GridWindow.Children.Add(subWindow);
+            }
+        }
+
+        private void Graf_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (!(subWindow is Avtor))
+            {
+                GridWindow.Children.Remove(subWindow);
+                subWindow = new Avtor();
+                subWindow.SetValue(Grid.RowProperty, 3);
+                GridWindow.Children.Add(subWindow);
+            }
+        }
     }
 }
