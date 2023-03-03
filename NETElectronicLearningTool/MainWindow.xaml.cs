@@ -99,10 +99,10 @@ namespace NETElectronicLearningTool
 
         private void Graf_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (!(subWindow is Avtor))
+            if (!(subWindow is Graf))
             {
                 GridWindow.Children.Remove(subWindow);
-                subWindow = new Avtor();
+                subWindow = new Graf();
                 subWindow.SetValue(Grid.RowProperty, 3);
                 GridWindow.Children.Add(subWindow);
             }
