@@ -27,8 +27,13 @@ namespace NETElectronicLearningTool.EF
             modelBuilder.Entity<ArticlePage>()
                 .Property(x => x.Id)
                 .HasDefaultValueSql("NEWID()");
+
+            modelBuilder.Entity<MethodDiscription>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
         }
         public DbSet<Article> Articles { get; set; }   
         public DbSet<ArticlePage> ArticlePages { get; set; }
+        public DbSet<MethodDiscription> DictionaryOfFunctions { get; set; }
     }
 }

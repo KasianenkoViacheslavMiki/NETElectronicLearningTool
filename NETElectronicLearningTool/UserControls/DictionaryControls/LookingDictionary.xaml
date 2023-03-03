@@ -1,0 +1,84 @@
+﻿<UserControl x:Class="NETElectronicLearningTool.UserControls.DictionaryControls.LookingDictionary"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls.DictionaryControls"
+             mc:Ignorable="d" 
+              d:DesignHeight="450" d:DesignWidth="1032.228">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10">
+                
+            </ColumnDefinition>
+            <ColumnDefinition>
+                
+            </ColumnDefinition>
+            <ColumnDefinition Width="10">
+
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20">
+
+            </RowDefinition>
+            <RowDefinition>
+
+            </RowDefinition >
+            <RowDefinition Height="50">
+
+            </RowDefinition>
+            <RowDefinition Height="50">
+
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200">
+
+                </ColumnDefinition>
+                <ColumnDefinition Width="10">
+                    
+                </ColumnDefinition>
+                <ColumnDefinition>
+
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TreeView Name="TreeMethod" MouseDoubleClick="TreeView_MouseDoubleClick"/>
+            
+            <Grid  Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50">
+
+                    </RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition>
+
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox Name="NameMethod" Grid.Row="0"  IsReadOnly="True" />
+                <TextBox Name="DescriptionMethod"  Grid.Row="2" IsReadOnly="True">
+                </TextBox>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5">
+
+                </ColumnDefinition>
+                <ColumnDefinition Width="150">
+
+                </ColumnDefinition>
+                <ColumnDefinition Width="55">
+
+                </ColumnDefinition>
+                <ColumnDefinition >
+
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Name="Find" Grid.Column="1" Grid.ColumnSpan="1" Height="30"/>
+            <Button Grid.Column="2" Content="Вивести" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="Button_Click"/>
+        </Grid>
+    </Grid>
+</UserControl>
