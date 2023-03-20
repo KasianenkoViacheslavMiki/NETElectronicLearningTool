@@ -96,6 +96,10 @@ namespace NETElectronicLearningTool.Controllers
         private BitmapImage BitmapImageFromBytes(byte[] bytes)
         {
             var bitmapImage = new BitmapImage();
+            if (bytes == null)
+            {
+                return bitmapImage;
+            }
             bitmapImage.BeginInit();
             bitmapImage.StreamSource = new MemoryStream(bytes);
             bitmapImage.EndInit();
