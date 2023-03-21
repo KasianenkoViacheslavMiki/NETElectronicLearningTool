@@ -5,14 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace NETElectronicLearningTool.Command
+namespace NETElectronicLearningTool.Command.CommandChart
 {
     public class ChangeCommand : ICommand
     {
         private Action<object> execute;
         private Func<object, bool> canExecute;
 
-        public ChangeCommand(Action<object> execute, Func<object, bool> canExecute=null)
+        public ChangeCommand(Action<object> execute, Func<object, bool> canExecute = null)
         {
             this.execute = execute;
             this.canExecute = canExecute;
@@ -26,12 +26,12 @@ namespace NETElectronicLearningTool.Command
 
         public bool CanExecute(object parameter)
         {
-            return this.canExecute == null || this.canExecute(parameter);
+            return canExecute == null || canExecute(parameter);
         }
 
         public void Execute(object parameter)
         {
-            this.execute(parameter);
+            execute(parameter);
         }
     }
 }

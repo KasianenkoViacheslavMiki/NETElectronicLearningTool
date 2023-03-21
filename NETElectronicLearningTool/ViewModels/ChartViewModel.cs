@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using NETElectronicLearningTool.Command;
+using NETElectronicLearningTool.Command.CommandChart;
 
 namespace NETElectronicLearningTool.ViewModels
 {
