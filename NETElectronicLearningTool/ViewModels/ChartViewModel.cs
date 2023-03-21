@@ -10,15 +10,15 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using NETElectronicLearningTool.Command;
 
-namespace NETElectronicLearningTool.Controllers
+namespace NETElectronicLearningTool.ViewModels
 {
-    public class ChartViewModel: INotifyPropertyChanged
+    public class ChartViewModel : ViewModelBase
     {
         public PlotModel Model { get; private set; }
         public ChangeCommand ChangeNumber { get; private set; }
 
-        private int y=1;
-        public int YParams 
+        private int y = 1;
+        public int YParams
         {
             get => y;
             set
@@ -31,13 +31,11 @@ namespace NETElectronicLearningTool.Controllers
             }
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private void UpdateChart(object obj, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "YParams")
             {
-                Model.Series[0] = new FunctionSeries(((x) => Math.Sin(x / y)), 0, 10, 0.1) { MarkerType = MarkerType.Circle };
+                Model.Series[0] = new FunctionSeries((x) => Math.Sin(x / y), 0, 10, 0.1) { MarkerType = MarkerType.Circle };
                 Model.InvalidatePlot(true);
             }
         }
@@ -49,12 +47,11 @@ namespace NETElectronicLearningTool.Controllers
             ChangeNumber = new ChangeCommand((key) => y = (int)key);
             var tmp = new PlotModel { Title = "y = sin(x/k)" };
 
-            var series1 = new FunctionSeries(((x) => Math.Sin(x / y)), 0, 10, 0.1) { MarkerType = MarkerType.Circle };
+            var series1 = new FunctionSeries((x) => Math.Sin(x / y), 0, 10, 0.1) { MarkerType = MarkerType.Circle };
             tmp.Series.Add(series1);
 
-            this.Model = tmp;
+            Model = tmp;
         }
-        public void OnPropertyChanged([CallerMemberName] string name = "") =>  PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-
+       
     }
 }

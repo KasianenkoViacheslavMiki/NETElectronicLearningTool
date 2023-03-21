@@ -41,7 +41,7 @@
             <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/NET_Core_Logo.svg.png"/>
 
         </Grid>
-        <Grid Background="#5c2d91" Grid.Row="1" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+        <Grid Background="#5c2d91" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition>
                 </ColumnDefinition>
@@ -63,39 +63,39 @@
                        Grid.Column="0"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Material_MouseLeftButtonDown">
+                       FontSize="18">
             </TextBlock>
             <TextBlock x:Name="Training" Text="Тренування"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Training_MouseLeftButtonDown"/>
+                       FontSize="18"/>
             <TextBlock x:Name="Test" Text="Тестування"
                        Grid.Column="2"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Test_MouseLeftButtonDown"/>
+                       FontSize="18" />
             <TextBlock x:Name="Setting" Text="Настройки"
                        Grid.Column="3"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Setting_MouseLeftButtonDown"/>
+                       FontSize="18" />
             <TextBlock x:Name="Avtor" Text="Про автора"
                        Grid.Column="4"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Avtor_MouseLeftButtonDown"/>
+                       FontSize="18" />
             <TextBlock x:Name="Dictionary" Text="Словник"
                        Grid.Column="5"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Dictionary_MouseLeftButtonDown" />
+                       FontSize="18" />
             <TextBlock x:Name="Graf" Text="Графік"
                        Grid.Column="6"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Graf_MouseLeftButtonDown" />
+                       FontSize="18" />
         </Grid>
-        <local:Teach x:Name="WindowTeach" Grid.Row="2" />
+        <ContentControl Content="{Binding SelectedUserControl}" Grid.Row="2" />
     </Grid>
 </Window>

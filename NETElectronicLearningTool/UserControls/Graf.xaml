@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
-             xmlns:oxy="http://oxyplot.org/wpf" xmlns:NETElectronicLearningTool="clr-namespace:NETElectronicLearningTool.Controllers" x:Class="NETElectronicLearningTool.UserControls.Graf"
+             xmlns:oxy="http://oxyplot.org/wpf" xmlns:NETElectronicLearningTool="clr-namespace:NETElectronicLearningTool.ViewModels" x:Class="NETElectronicLearningTool.UserControls.Graf"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.DataContext>

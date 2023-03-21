@@ -31,6 +31,27 @@ namespace NETElectronicLearningTool.EF
             modelBuilder.Entity<MethodDiscription>()
                 .Property(x => x.Id)
                 .HasDefaultValueSql("NEWID()");
+
+            modelBuilder.Entity<Test>()
+                .HasMany<TestQuestion>(x => x.TestQuestions)
+                .WithOne(x => x.Test)
+                .HasForeignKey(x => x.Id);
+
+            modelBuilder.Entity<Test>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
+
+            modelBuilder.Entity<TestQuestion>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
+           
+            modelBuilder.Entity<QuestionAnswer>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
+
+            modelBuilder.Entity<User>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
         }
         public DbSet<Article> Articles { get; set; }   
         public DbSet<ArticlePage> ArticlePages { get; set; }
