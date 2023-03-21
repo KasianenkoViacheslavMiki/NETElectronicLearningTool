@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:NETElectronicLearningTool.UserControls.DictionaryControls"
+             xmlns:viewmodels="clr-namespace:NETElectronicLearningTool.ViewModels.DictionarySubViewModal"
              xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1032.228">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:LookingDictionaryViewModel}">
+            <view:LookingDictionary/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TableDictionaryViewModel}">
+            <view:TableDictionary/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Name="GridDictionary">
         
         <Grid.RowDefinitions>
@@ -25,16 +35,63 @@
 
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock x:Name="DictionaryTable" Text="Таблиця словника"
+            <Button x:Name="DictionaryTable"
+                       Content="Таблиця словника"
                        Grid.Column="0"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="DictionaryTable_MouseLeftButtonDown" />
-            <TextBlock x:Name="Dictionarys" Text="Словник"
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="TableDictionary" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Таблиця словника"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="Dictionarys"
+                       Content="Словник"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Dictionary_MouseLeftButtonDown" />
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="LookingDictionary" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Словник"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
+        <ContentControl Content="{Binding SelectedUserControl}" Grid.Row="2" />
     </Grid>
 </UserControl>

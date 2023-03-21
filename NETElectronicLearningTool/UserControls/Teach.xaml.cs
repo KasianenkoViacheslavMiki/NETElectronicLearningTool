@@ -1,10 +1,11 @@
-﻿using NETElectronicLearningTool.Controllers;
-using NETElectronicLearningTool.EF;
+﻿using NETElectronicLearningTool.EF;
 using NETElectronicLearningTool.Interface;
+using NETElectronicLearningTool.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,97 +24,9 @@ namespace NETElectronicLearningTool.UserControls
     /// </summary>
     public partial class Teach : UserControl
     {
-        IGetMaterialOfTeach getMaterialOfTeach;
-        ControllerArticle controllerArticle;
-
         public Teach()
         {
-            controllerArticle = new ControllerArticle();
-            
-            getMaterialOfTeach = new RepositoryArticle(new LearningToolContext());
-            
             InitializeComponent();
-
-            InitializeData();
-
-            InitializeEvent();
-
-            InitializeSettingData();
-        }
-
-        private void InitializeSettingData()
-        {
-            SolidColorBrush brush = (SolidColorBrush)new BrushConverter().ConvertFromString(Properties.Settings.Default.BackgroundTextBox);
-            textPage.Background = brush;
-
-            if (!Int32.TryParse(Properties.Settings.Default.SizeFont,out int sizeFont))
-            {
-                MessageBox.Show("Can`t convert setting", "Error Setting", MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.Yes);
-            }
-            textPage.FontSize = sizeFont;
-
-            brush = (SolidColorBrush)new BrushConverter().ConvertFromString(Properties.Settings.Default.ColorFont);
-            textPage.Foreground = brush;
-        }
-        private async void InitializeData()
-        {
-            var list = await getMaterialOfTeach.GetGuidAndTitleAllArticles();
-            foreach (var article in list)
-            {
-                TreeViewItem newChild = new TreeViewItem();
-                newChild.Header = article.Item2;
-                newChild.Tag = article.Item1;
-                TreeArticle.Items.Add(newChild);
-            }
-        }
-        private void InitializeEvent()
-        {
-            controllerArticle.OnLastPage += ControllerArticle_OnLastPage;
-            controllerArticle.OnFirstPage += ControllerArticle_OnFirstPage;
-            controllerArticle.OnChangePage += ControllerArticle_OnChangePage;
-        }
-
-        private void ControllerArticle_OnChangePage(string text, BitmapImage image,uint numberPage,uint numberLastPage)
-        {
-            numberPageArticle.Content = numberPage+"/"+numberLastPage;
-            textPage.Text = text;
-            imagePage.Source = image;
-            Back.IsEnabled = true;
-            Forward.IsEnabled = true;
-        }
-
-        private void ControllerArticle_OnFirstPage()
-        {
-            Back.IsEnabled = false;
-        }
-
-        private void ControllerArticle_OnLastPage()
-        {
-            Forward.IsEnabled = false;
-        }
-
-        private void Forward_Click(object sender, RoutedEventArgs e)
-        {
-            controllerArticle.NextPage();
-        }
-
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            controllerArticle.PrevPage();
-        }
-
-        private async void TreeArticle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            var article = (TreeViewItem) TreeArticle.SelectedItem;
-            if (article != null)
-            {
-                var result = await getMaterialOfTeach.GetArticle((Guid)article.Tag);
-                controllerArticle.ChangeArticle(result);
-            }
-        }
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }

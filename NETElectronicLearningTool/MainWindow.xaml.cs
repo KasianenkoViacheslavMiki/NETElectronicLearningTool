@@ -1,4 +1,5 @@
 ﻿using NETElectronicLearningTool.UserControls;
+using NETElectronicLearningTool.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +22,10 @@ namespace NETElectronicLearningTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        UserControl subWindow;
         public MainWindow()
         {
             InitializeComponent();
-            subWindow = WindowTeach;
+            DataContext = new MainViewModel();
         }
 
         private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
@@ -33,78 +33,6 @@ namespace NETElectronicLearningTool
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();
-            }
-        }
-
-        private void Material_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(subWindow is Teach))
-            {
-                GridWindow.Children.Remove(subWindow);
-                subWindow = new Teach();
-                subWindow.SetValue(Grid.RowProperty, 3);
-                GridWindow.Children.Add(subWindow);
-            }
-            //Міняє вікно на викладання матеріалу
-        }
-
-        private void Test_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //Міняє вікно на тестування
-        }
-
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void Training_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            //Міняє вікно на тренування
-        }
-
-        private void Setting_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(subWindow is Settings))
-            {
-                GridWindow.Children.Remove(subWindow);
-                subWindow = new Settings();
-                subWindow.SetValue(Grid.RowProperty, 3);
-                GridWindow.Children.Add(subWindow);
-            }
-            //Міняє вікно на настройки
-        }
-
-        private void Avtor_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(subWindow is Avtor))
-            {
-                GridWindow.Children.Remove(subWindow);
-                subWindow = new Avtor();
-                subWindow.SetValue(Grid.RowProperty, 3);
-                GridWindow.Children.Add(subWindow);
-            }
-        }
-
-        private void Dictionary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(subWindow is Dictionary))
-            {
-                GridWindow.Children.Remove(subWindow);
-                subWindow = new Dictionary();
-                subWindow.SetValue(Grid.RowProperty, 3);
-                GridWindow.Children.Add(subWindow);
-            }
-        }
-
-        private void Graf_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (!(subWindow is Graf))
-            {
-                GridWindow.Children.Remove(subWindow);
-                subWindow = new Graf();
-                subWindow.SetValue(Grid.RowProperty, 3);
-                GridWindow.Children.Add(subWindow);
             }
         }
     }

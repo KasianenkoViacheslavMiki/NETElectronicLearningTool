@@ -30,5 +30,11 @@ namespace NETElectronicLearningTool.EF
                 .Where(x=>x.NameFunction.StartsWith(name))
                 .ToListAsync();
         }
+
+        public async Task<MethodDiscription> GetFunctionsByGuid(Guid guid)
+        {
+            return await _context.DictionaryOfFunctions
+                .FirstOrDefaultAsync(x => x.Id == guid);
+        }
     }
 }
