@@ -25,48 +25,9 @@ namespace NETElectronicLearningTool.UserControls
     /// </summary>
     public partial class Dictionary : UserControl
     {
-        //UserControl subWindow;
-
-        //IGetDictionary getDictionary;
-
-        //IEnumerable<MethodDiscription> methodDiscriptions;
-
         public Dictionary()
         {
             InitializeComponent();
-
-            //getDictionary = new RepositoryDictionary(new LearningToolContext());
-
-            //subWindow = new UserControl();
-            
-            //InitializeData();
-        }
-
-        //private async void InitializeData()
-        //{
-        //    methodDiscriptions = await getDictionary.GetDictionaryOfFunctions();
-        //}
-
-        //private void DictionaryTable_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (!(subWindow is TableDictionary))
-        //    {
-        //        GridDictionary.Children.Remove(subWindow);
-        //        subWindow = new TableDictionary(methodDiscriptions);
-        //        subWindow.SetValue(Grid.RowProperty, 1);
-        //        GridDictionary.Children.Add(subWindow);
-        //    }
-        //}
-
-        //private void Dictionary_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        //{
-        //    if (!(subWindow is LookingDictionary))
-        //    {
-        //        GridDictionary.Children.Remove(subWindow);
-        //        subWindow = new LookingDictionary(methodDiscriptions);
-        //        subWindow.SetValue(Grid.RowProperty, 1);
-        //        GridDictionary.Children.Add(subWindow);
-        //    }
-        //}
+        }    
     }
 }

@@ -19,6 +19,7 @@ namespace NETElectronicLearningTool.ViewModels.DictionarySubViewModal
         //}
         public TableDictionaryViewModel()
         {
+
         }
     }
 }

@@ -27,9 +27,13 @@ namespace NETElectronicLearningTool.ViewModels
             set
             {
                 _selectedUserControl = value;
-                OnPropertyChanged("SelectedUserControlDictionaryForm");
+                OnPropertyChanged(nameof(SelectedUserControl));
             }
         }
         public ICommand UpdateViewCommand { get; set; }
+        //private async void InitializeData()
+        //{
+        //    methodDiscriptions = await getDictionary.GetDictionaryOfFunctions();
+        //}
     }
 }
