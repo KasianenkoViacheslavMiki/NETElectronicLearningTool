@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NETElectronicLearningTool.Controllers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,16 @@ namespace NETElectronicLearningTool.ViewModels
 {
     public class ArticleViewModel:ViewModelBase
     {
+        private ControllerArticle controllerArticle;
+
+        public ArticleViewModel()
+        {
+        }
+
+        //public ArticleViewModel(ControllerArticle controllerArticle)
+        //{
+        //    this.controllerArticle = controllerArticle;
+        //}
 
     }
 }

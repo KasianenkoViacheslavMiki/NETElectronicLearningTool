@@ -18,24 +18,60 @@ namespace NETElectronicLearningTool.Command.CommandMainWindow
         public UpdateViewCommand(MainViewModel _mainViewModel)
         {
             mainViewModel = _mainViewModel;
+            canExecute += CanExecute;
         }
 
-        public event EventHandler CanExecuteChanged
+        public event EventHandler? CanExecuteChanged
         {
             add { CommandManager.RequerySuggested += value; }
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
+            if (canExecute == null)
+            {
+                return;
+            }
+
+            if (parameter == null)
+            {
+                return;
+            }
+
             if (parameter.ToString() == "Graf")
             {
                 mainViewModel.SelectedUserControl = new ChartViewModel();
+                return;
+            }
+
+            if (parameter.ToString() == "Settings")
+            {
+                mainViewModel.SelectedUserControl = new SettingViewModel();
+                return;
+            }
+
+            if (parameter.ToString() == "Dictionary")
+            {
+                mainViewModel.SelectedUserControl = new DictionaryViewModel();
+                return;
+            }
+
+            if (parameter.ToString() == "Avtor")
+            {
+                mainViewModel.SelectedUserControl = new AboutViewModel();
+                return;
+            }
+
+            if (parameter.ToString() == "Teach")
+            {
+                mainViewModel.SelectedUserControl = new ArticleViewModel();
+                return;
             }
         }
     }

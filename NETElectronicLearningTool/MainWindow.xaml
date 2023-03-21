@@ -59,42 +59,180 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="Material" Text="Матеріал"
+            <Button x:Name="Material"
+                       Background="#5c2d91"
+                       Content="Матеріали"
                        Grid.Column="0"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18">
-            </TextBlock>
-            <TextBlock x:Name="Training" Text="Тренування"
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="Teach" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Матеріали"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="Training"
+                       Background="#5c2d91"
+                       Content="Тренування"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18"/>
-            <TextBlock x:Name="Test" Text="Тестування"
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Тренування"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="Setting"
+                       Background="#5c2d91"
+                       Content="Настройки"
                        Grid.Column="2"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" />
-            <TextBlock x:Name="Setting" Text="Настройки"
-                       Grid.Column="3"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="18" />
-            <TextBlock x:Name="Avtor" Text="Про автора"
-                       Grid.Column="4"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="18" />
-            <TextBlock x:Name="Dictionary" Text="Словник"
-                       Grid.Column="5"
-                       VerticalAlignment="Center"
-                       HorizontalAlignment="Center"
-                       FontSize="18" />
-            <TextBlock x:Name="Graf" Text="Графік"
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="Settings" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Настройки"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="Avtor"
+                       Background="#5c2d91"
+                       Content="Про автора"
                        Grid.Column="6"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" />
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="Avtor" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Про автора"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="Dictionary"
+                       Background="#5c2d91"
+                       Content="Словник"
+                       Grid.Column="3"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="Dictionary" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Словник"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="Graf"
+                       Background="#5c2d91"
+                       Content="Графік"
+                       Grid.Column="4"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontSize="18"
+                       Command="{Binding UpdateViewCommand}" CommandParameter="Graf" BorderBrush="{x:Null}">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="buttonBorder" >
+                            <ContentControl HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            Content="Графік"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="FontWeight" Value="Bold" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="buttonBorder" Property="Background" Value="#5c2d80" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
         </Grid>
         <ContentControl Content="{Binding SelectedUserControl}" Grid.Row="2" />
     </Grid>

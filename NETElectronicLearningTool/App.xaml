@@ -9,5 +9,17 @@
         <DataTemplate DataType="{x:Type viewmodels:ChartViewModel}">
             <view:Graf/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ArticleViewModel}">
+            <view:Teach/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:AboutViewModel}">
+            <view:Avtor/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:DictionaryViewModel}">
+            <view:Dictionary/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:SettingViewModel}">
+            <view:Settings/>
+        </DataTemplate>
     </Application.Resources>
 </Application>

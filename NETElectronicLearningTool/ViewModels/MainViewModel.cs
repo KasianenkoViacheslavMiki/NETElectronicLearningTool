@@ -10,7 +10,7 @@ namespace NETElectronicLearningTool.ViewModels
 {
     public class MainViewModel:ViewModelBase
     {
-        private ViewModelBase _selectedUserControl= new ChartViewModel();
+        private ViewModelBase _selectedUserControl;
 
         public MainViewModel()
         {
@@ -25,7 +25,8 @@ namespace NETElectronicLearningTool.ViewModels
             }
             set 
             { 
-                _selectedUserControl = value; 
+                _selectedUserControl = value;
+                OnPropertyChanged(nameof(SelectedUserControl));
             }
         }
         public ICommand UpdateViewCommand { get; set; }

@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:view="clr-namespace:NETElectronicLearningTool.UserControls.DictionaryControls"
+             xmlns:viewmodels="clr-namespace:NETElectronicLearningTool.ViewModels.DictionarySubViewModal"
              xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1032.228">
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewmodels:LookingDictionaryViewModel}">
+            <view:LookingDictionary/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:TableDictionaryViewModel}">
+            <view:TableDictionary/>
+        </DataTemplate>
+    </UserControl.Resources>
     <Grid Name="GridDictionary">
         
         <Grid.RowDefinitions>
@@ -29,12 +39,13 @@
                        Grid.Column="0"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="DictionaryTable_MouseLeftButtonDown" />
+                       FontSize="18"  />
             <TextBlock x:Name="Dictionarys" Text="Словник"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
-                       FontSize="18" MouseLeftButtonDown="Dictionary_MouseLeftButtonDown" />
+                       FontSize="18"  />
         </Grid>
+        <ContentControl Content="{Binding SelectedUserControl}" Grid.Row="2" />
     </Grid>
 </UserControl>

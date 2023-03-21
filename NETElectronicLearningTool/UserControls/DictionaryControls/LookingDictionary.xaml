@@ -45,7 +45,7 @@
 
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TreeView Name="TreeMethod" MouseDoubleClick="TreeView_MouseDoubleClick"/>
+            <TreeView Name="TreeMethod" />
             
             <Grid  Grid.Column="2">
                 <Grid.RowDefinitions>
@@ -78,7 +78,7 @@
                 </ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBox Name="Find" Grid.Column="1" Grid.ColumnSpan="1" Height="30"/>
-            <Button Grid.Column="2" Content="Вивести" HorizontalAlignment="Center"  VerticalAlignment="Center" Click="Button_Click"/>
+            <Button Grid.Column="2" Content="Вивести" HorizontalAlignment="Center"  VerticalAlignment="Center" />
         </Grid>
     </Grid>
 </UserControl>
