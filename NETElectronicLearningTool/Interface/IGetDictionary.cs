@@ -11,5 +11,6 @@ namespace NETElectronicLearningTool.Interface
     {
         public Task<IEnumerable<MethodDiscription>> GetDictionaryOfFunctions();
         public Task<IEnumerable<MethodDiscription>> GetDictionaryOfFunctionsByName(string name);
+        public Task<MethodDiscription> GetFunctionsByGuid(Guid guid);
     }
 }

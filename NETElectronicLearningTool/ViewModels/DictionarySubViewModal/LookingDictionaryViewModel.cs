@@ -1,51 +1,114 @@
-﻿using System;
+﻿using NETElectronicLearningTool.Command.CommandDictionaryWindow.SubCommandDictionary;
+using NETElectronicLearningTool.EF;
+using NETElectronicLearningTool.EF.Model;
+using NETElectronicLearningTool.Interface;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace NETElectronicLearningTool.ViewModels.DictionarySubViewModal
 {
     public class LookingDictionaryViewModel : ViewModelBase
     {
+        IGetDictionary getDictionary = new RepositoryDictionary(new LearningToolContext());
+
+        public ICommand Filter { get; set; }
+        public ICommand Selected { get; set; } 
+
+        private List<ItemTree> itemsTree = new List<ItemTree>();
+        public List<ItemTree> ItemsTree
+        {
+            get
+            {
+                return itemsTree;
+            }
+            set
+            {
+                itemsTree = value;
+                OnPropertyChanged(nameof(ItemsTree));
+            }
+        }
+
+        private string nameMethod;
+
+        public string NameMethod
+        {
+            get 
+            { 
+                return nameMethod; 
+            }
+            set 
+            { 
+                nameMethod = value;
+                OnPropertyChanged(nameof(NameMethod));
+            }
+        }
+
+
+        private string textMethod;
+
+        public string TextMethod
+        {
+            get 
+            { 
+                return textMethod; 
+            }
+            set 
+            { 
+                textMethod = value;
+                OnPropertyChanged(nameof(TextMethod));
+            }
+        }
+        private string filterValue;
+
+        public string FilterValue
+        {
+            get
+            {
+                return filterValue;
+            }
+            set
+            {
+                filterValue = value;
+                OnPropertyChanged(nameof(FilterValue));
+            }
+        }
+        public async void FilterInformation(string name)
+        {
+            var items = await getDictionary.GetDictionaryOfFunctionsByName(name);
+            List<ItemTree> method = new List<ItemTree>();
+            foreach (var item in items)
+            {
+                method.Add(new ItemTree(item.Id, item.NameFunction));
+            }
+            ItemsTree = method;
+        }
+        public async void SetInformationMethod(Guid guid)
+        {
+            MethodDiscription methodDiscription = await getDictionary.GetFunctionsByGuid(guid);
+            TextMethod = ""+methodDiscription.DiscriptionFunction;
+            NameMethod = methodDiscription.NameClass+"."+ methodDiscription.NameFunction;
+        }
+
+        private async void GetGuidAndNameMethod()
+        {
+            var items = (await getDictionary.GetDictionaryOfFunctions()).ToList();
+            List<ItemTree> method = new List<ItemTree>();
+            foreach (var item in items)
+            {
+                method.Add(new ItemTree(item.Id, item.NameFunction));
+            }
+            ItemsTree = method;
+        }
         public LookingDictionaryViewModel()
         {
-
+            Filter = new FilterCommand(this);
+            Selected = new SelectedCommand(this);
+            GetGuidAndNameMethod();
         }
-        //ControllerDictionary controllerDictionary;
-        //public LookingDictionary(IEnumerable<MethodDiscription> methodDiscriptions)
-        //{
-        //    InitializeComponent();
-        //    controllerDictionary = new ControllerDictionary(methodDiscriptions);
-        //    InitializeData(controllerDictionary.ListMethod);
-        //}
-
-        //private async void InitializeData(IEnumerable<MethodDiscription> list)
-        //{
-        //    TreeMethod.Items.Clear();
-        //    foreach (var article in list)
-        //    {
-        //        TreeViewItem newChild = new TreeViewItem();
-        //        newChild.Header = article.NameFunction;
-        //        newChild.Tag = article.Id;
-        //        TreeMethod.Items.Add(newChild);
-        //    }
-        //}
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    InitializeData(controllerDictionary.Filter(Find.Text));
-        //}
-
-        //private void TreeView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        //{
-        //    if ((TreeViewItem)TreeMethod.SelectedItem == null) return;
-        //    var methodDiscriptions = (TreeViewItem)TreeMethod.SelectedItem;
-        //    controllerDictionary.ChangeFunction((Guid)methodDiscriptions.Tag);
-        //    if (methodDiscriptions != null)
-        //    {
-        //        NameMethod.Text = controllerDictionary.NameFunction;
-        //        DescriptionMethod.Text = controllerDictionary.Discription;
-        //    }
-        //}
     }
 }

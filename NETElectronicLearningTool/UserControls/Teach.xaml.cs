@@ -1,5 +1,4 @@
-﻿using NETElectronicLearningTool.Controllers;
-using NETElectronicLearningTool.EF;
+﻿using NETElectronicLearningTool.EF;
 using NETElectronicLearningTool.Interface;
 using NETElectronicLearningTool.ViewModels;
 using System;

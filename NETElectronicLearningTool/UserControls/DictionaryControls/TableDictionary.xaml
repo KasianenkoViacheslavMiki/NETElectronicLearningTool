@@ -7,6 +7,6 @@
              mc:Ignorable="d" 
               d:DesignHeight="450" d:DesignWidth="1032.228">
     <Grid>
-        <DataGrid Name="TableMethod" />
+        <DataGrid Name="TableMethod" ItemsSource="{Binding TableMethod}" />
     </Grid>
 </UserControl>
