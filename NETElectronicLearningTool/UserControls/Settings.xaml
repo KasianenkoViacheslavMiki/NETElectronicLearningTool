@@ -17,10 +17,14 @@
         </Grid.ColumnDefinitions>
         <Label Content="Настройки матеріалів" HorizontalAlignment="Center" Margin="0,10,0,178" Height="30"/>
         <Label Content="Розмір символів" HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="SizeFont" HorizontalAlignment="Left" Margin="120,41,0,0" VerticalAlignment="Top" Width="120" />
-        <Label Content="Колір символів" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="ColorFont" HorizontalAlignment="Left" Margin="120,78,0,0" VerticalAlignment="Top" Width="120" />
+        <ComboBox SelectedItem="{Binding FontSize}" ItemsSource="{Binding ListSize}" Name="SizeFont" HorizontalAlignment="Left" Margin="120,41,0,0" VerticalAlignment="Top" Width="120" >
+        </ComboBox> 
+        <Label  Content="Колір символів" HorizontalAlignment="Left" Margin="10,76,0,0" VerticalAlignment="Top"/>
+        <ComboBox SelectedItem="{Binding ColorFont}" ItemsSource="{Binding ListColor}" Name="ColorFont" HorizontalAlignment="Left" Margin="120,78,0,0" VerticalAlignment="Top" Width="120" >
+        </ComboBox>
         <Label Content="Колір полотна" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top"/>
-        <ComboBox Name="ColorBackground" HorizontalAlignment="Left" Margin="120,113,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox SelectedItem="{Binding ColorBackground}"  ItemsSource="{Binding ListColor}" Name="ColorBackground" HorizontalAlignment="Left" Margin="120,113,0,0" VerticalAlignment="Top" Width="120">
+         
+        </ComboBox>
     </Grid>
 </UserControl>

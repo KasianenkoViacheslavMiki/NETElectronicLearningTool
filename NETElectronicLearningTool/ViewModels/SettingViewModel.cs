@@ -1,54 +1,122 @@
-﻿using System;
+﻿using NETElectronicLearningTool.Command.CommandSettings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace NETElectronicLearningTool.ViewModels
 {
     public class SettingViewModel:ViewModelBase
     {
-        Dictionary<string, SolidColorBrush> listColor = new Dictionary<string, SolidColorBrush>();
+        public ICommand ChangeBackground { get; set; }
+        public ICommand ChangeColorFont { get; set; }
+        public ICommand ChangeSizeFont { get; set; }
 
-        //private void InitializeDataComponent()
-        //{
-        //    List<string> listSize = new List<string>();
-        //    listSize.Add("8");
-        //    listSize.Add("12");
-        //    listSize.Add("14");
-        //    listSize.Add("16");
+       
 
-        //    SizeFont.ItemsSource = listSize;
+        public SettingViewModel()
+        {
+            InitializeDataComponent();
 
-        //    listColor.Add("AliceBlue", Brushes.AliceBlue);
-        //    listColor.Add("Black", Brushes.Black);
-        //    listColor.Add("Blue", Brushes.Blue);
-        //    listColor.Add("Brown", Brushes.Brown);
-        //    listColor.Add("White", Brushes.White);
+            FontSize = Int32.Parse(Properties.Settings.Default.DefaultSize);
+            ColorFont = Properties.Settings.Default.DefaultColorFont;
+            ColorBackground = Properties.Settings.Default.DefaultBackgroundTextBox;
+        }
 
-        //    ColorFont.ItemsSource = listColor.Keys;
-        //    ColorBackground.ItemsSource = listColor.Keys;
+        private List<string> listSize = new List<string>();
 
-        //    SizeFont.SelectedItem = Properties.Settings.Default.SizeFont;
-        //    ColorFont.SelectedItem = Properties.Settings.Default.ColorFont;
-        //    ColorBackground.SelectedItem = Properties.Settings.Default.BackgroundTextBox;
-        //}
+        public List<string> ListSize
+        {
+            get 
+            { 
+                return listSize; 
+            }
+            set 
+            { 
+                listSize = value;
+                OnPropertyChanged(nameof(ListSize));
+            }
+        }
 
-        //private void SizeFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Properties.Settings.Default.SizeFont = (string)SizeFont.SelectedItem;
-        //}
+        private Dictionary<string, SolidColorBrush> listColor = new Dictionary<string, SolidColorBrush>();
 
-        //private void ColorFont_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Properties.Settings.Default.ColorFont = (string)ColorFont.SelectedItem;
-        //}
+        public Dictionary<string, SolidColorBrush> ListColor
+        {
+            get 
+            { 
+                return listColor; 
+            }
+            set 
+            { 
+                listColor = value;
+                OnPropertyChanged(nameof(ListColor));
+            }
+        }
 
-        //private void ColorBackground_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    Properties.Settings.Default.BackgroundTextBox = (string)ColorBackground.SelectedItem;
-        //}
+        private int fontSize;
+
+        public int FontSize
+        {
+            get 
+            { 
+                return fontSize; 
+            }
+            set 
+            { 
+                fontSize = value;
+                Properties.Settings.Default.SizeFont = value.ToString();
+                OnPropertyChanged(nameof(FontSize));
+            }
+        }
+        private string colorFont;
+
+        public string ColorFont
+        {
+            get 
+            { 
+                return colorFont; 
+            }
+            set
+            { 
+                colorFont = value;
+                Properties.Settings.Default.ColorFont = value.ToString();
+                OnPropertyChanged(nameof(ColorFont));
+            }
+        }
+
+        private string colorBackground;
+
+        public string ColorBackground
+        {
+            get 
+            { 
+                return colorBackground; 
+            }
+            set 
+            { 
+                colorBackground = value;
+                Properties.Settings.Default.BackgroundTextBox = value.ToString();
+                OnPropertyChanged(nameof(ColorBackground));
+            }
+        }
+
+
+        private void InitializeDataComponent()
+        {
+            ListSize.Add("8");
+            ListSize.Add("12");
+            ListSize.Add("14");
+            ListSize.Add("16");
+
+            ListColor.Add("AliceBlue", Brushes.AliceBlue);
+            ListColor.Add("Black", Brushes.Black);
+            ListColor.Add("Blue", Brushes.Blue);
+            ListColor.Add("Brown", Brushes.Brown);
+            ListColor.Add("White", Brushes.White);
+        }
     }
 }
