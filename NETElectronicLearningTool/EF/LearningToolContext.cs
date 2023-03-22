@@ -35,7 +35,7 @@ namespace NETElectronicLearningTool.EF
             modelBuilder.Entity<Test>()
                 .HasMany<TestQuestion>(x => x.TestQuestions)
                 .WithOne(x => x.Test)
-                .HasForeignKey(x => x.Id);
+                .HasForeignKey(x => x.IdTest);
 
             modelBuilder.Entity<Test>()
                 .Property(x => x.Id)
@@ -56,5 +56,9 @@ namespace NETElectronicLearningTool.EF
         public DbSet<Article> Articles { get; set; }   
         public DbSet<ArticlePage> ArticlePages { get; set; }
         public DbSet<MethodDiscription> DictionaryOfFunctions { get; set; }
+        public DbSet<QuestionAnswer> QuestionAnswers { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<TestQuestion> TestQuestions { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

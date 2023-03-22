@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230321235240_fix-add-test")]
+    partial class fixaddtest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -129,9 +132,6 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<Guid?>("IdTest")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");
 
@@ -139,8 +139,6 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdTest");
 
                     b.ToTable("TestQuestions");
                 });
@@ -179,7 +177,9 @@ namespace NETElectronicLearningTool.Migrations
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.Test", "Test")
                         .WithMany("TestQuestions")
-                        .HasForeignKey("IdTest");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Test");
                 });
