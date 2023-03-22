@@ -73,6 +73,11 @@ namespace NETElectronicLearningTool.Command.CommandMainWindow
                 mainViewModel.SelectedUserControl = new ArticleViewModel();
                 return;
             }
+            if (parameter.ToString() == "Exam")
+            {
+                mainViewModel.SelectedUserControl = new ExamViewModel();
+                return;
+            }
         }
     }
 }

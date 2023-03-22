@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230322160347_add-CountQuestionForExam-in-Test")]
+    partial class addCountQuestionForExaminTest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,13 +117,7 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<int>("CountQuestionForExamMany")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountQuestionForExamSingle")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CountQuestionForExamText")
+                    b.Property<int>("CountQuestionForExam")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")

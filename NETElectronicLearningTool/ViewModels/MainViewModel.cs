@@ -1,4 +1,6 @@
 ﻿using NETElectronicLearningTool.Command.CommandMainWindow;
+using NETElectronicLearningTool.ViewModels.Mediator;
+using Prism.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +14,40 @@ namespace NETElectronicLearningTool.ViewModels
     {
         private ViewModelBase _selectedUserControl;
 
+        private int sizeBar;
+        private bool visibleBar;
+
+        public bool VisibleBar
+        {
+            get 
+            { 
+                return visibleBar; 
+            }
+            set 
+            { 
+                visibleBar = value;
+                OnPropertyChanged(nameof(VisibleBar));
+            }
+        }
+        
+
+        public int SizeBar
+        {
+            get 
+            { 
+                return sizeBar; 
+            }
+            set 
+            { 
+                sizeBar = value;
+                OnPropertyChanged(nameof(SizeBar));
+            }
+        }
+
+
         public MainViewModel()
         {
+            EventSystem.Subscribe<ToggleMessage>(ToggleBar);
             UpdateViewCommand = new UpdateViewCommand(this);
         }
 
@@ -31,5 +65,16 @@ namespace NETElectronicLearningTool.ViewModels
         }
         public ICommand UpdateViewCommand { get; set; }
 
+        public void ToggleBar(ToggleMessage msg)
+        {
+            if (msg.message == "Hide")
+            {
+                return;
+            }
+            if (msg.message == "Show")
+            {
+                return;
+            }
+        }
     }
 }

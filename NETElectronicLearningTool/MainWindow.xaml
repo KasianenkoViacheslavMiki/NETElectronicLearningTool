@@ -21,7 +21,7 @@
             <RowDefinition Name="Place" Height="462">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
+        <Grid.ColumnDefinitions >
             <ColumnDefinition>
             </ColumnDefinition>
         </Grid.ColumnDefinitions>
@@ -41,7 +41,7 @@
             <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/NET_Core_Logo.svg.png"/>
 
         </Grid>
-        <Grid Background="#5c2d91" Grid.Row="1">
+        <Grid  Background="#5c2d91" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition>
                 </ColumnDefinition>
@@ -90,7 +90,7 @@
             </Button>
             <Button x:Name="Training"
                        Background="#5c2d91"
-                       Content="Тренування"
+                       Content="Тестування"
                        Grid.Column="1"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
@@ -101,7 +101,7 @@
                         <Border x:Name="buttonBorder" >
                             <ContentControl HorizontalAlignment="Center"
                                             VerticalAlignment="Center"
-                                            Content="Тренування"/>
+                                            Content="Тестування"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="true">
