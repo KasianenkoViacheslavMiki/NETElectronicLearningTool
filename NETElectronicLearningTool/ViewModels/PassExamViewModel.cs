@@ -138,12 +138,12 @@ namespace NETElectronicLearningTool.ViewModels
                 ballExam = value;
 
                 OnPropertyChanged(nameof(BallExam));
-                if (ballExam == 1)
-                    InformationPassQuestion = "Відповідь вірна, отримано балів " + (int)ballExam;
-                if (ballExam == 0.5)
-                    InformationPassQuestion = "Відповідь наполовину вірна, отримано балів " + ballExam.ToString("0.0") +"\nВірні відповіді "+ stringTrueAnswer;
-                if (ballExam == 0)
-                    InformationPassQuestion = "Відповідь невірна, отримано балів " + (int)ballExam + "\nВірні відповіді " + stringTrueAnswer;
+                if (BallExam == 1)
+                    InformationPassQuestion = "Відповідь вірна, отримано балів " + (int)BallExam;
+                if (BallExam == 0.5)
+                    InformationPassQuestion = "Відповідь наполовину вірна, отримано балів " + BallExam.ToString("0.0") +"\nВірні відповіді "+ stringTrueAnswer;
+                if (BallExam == 0)
+                    InformationPassQuestion = "Відповідь невірна, отримано балів " + (int)BallExam + "\nВірні відповіді " + stringTrueAnswer;
             }
         }
 
@@ -269,7 +269,7 @@ namespace NETElectronicLearningTool.ViewModels
             }
             else if (question.Type == TypeQuestion.TextAnswer)
             {
-                countTrueAnswer = question.QuestionAnswers.Where(x => (x.TrueOrFalse == true || x.Answer == answers[0].Item1)).Count();
+                countTrueAnswer = question.QuestionAnswers.Where(x => (x.TrueOrFalse == true && x.Answer == answers[0].Item1)).Count();
                 userAnswer.IdUserAnswerTest = CurrentTest.Id;
                 userAnswer.TextAnswer = answers[0].Item1;
                 await passExam.PassQuestion(Test.Id, userAnswer);
