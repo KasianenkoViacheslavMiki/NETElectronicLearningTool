@@ -13,9 +13,9 @@ namespace NETElectronicLearningTool.EF.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
         public string? Name { get; set; }
-        public int CountQuestionForExamSingle { get; set; }
-        public int CountQuestionForExamMany { get; set; }
-        public int CountQuestionForExamText { get; set; }
+        public int? CountQuestionForExamSingle { get; set; }
+        public int? CountQuestionForExamMany { get; set; }
+        public int? CountQuestionForExamText { get; set; }
 
         public virtual IEnumerable<TestQuestion>? TestQuestions { get; set; }
     }

@@ -18,6 +18,6 @@ namespace NETElectronicLearningTool.EF.Model
         public TypeQuestion? Type { get; set; }
         public Guid? IdTest { get; set; }
         public Test? Test { get; set; }
-        IEnumerable<QuestionAnswer>? QuestionAnswers { get; set; }
+        public IEnumerable<QuestionAnswer>? QuestionAnswers { get; set; }
     }
 }

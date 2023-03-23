@@ -13,5 +13,7 @@ namespace NETElectronicLearningTool.EF.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public Guid Id { get; set; }
 
+        public IEnumerable<UserAnswerTest>? UserAnswerTests { get; set; }
+
     }
 }

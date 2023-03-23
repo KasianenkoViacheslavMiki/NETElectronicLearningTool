@@ -4,14 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
+             xmlns:loc="clr-namespace:NETElectronicLearningTool.ViewModels.ExamControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="20">
                 
             </RowDefinition>
-            <RowDefinition>
+            <RowDefinition Height="{Binding ViewInfo}">
+
+            </RowDefinition>
+            <RowDefinition Height="{Binding Message}">
 
             </RowDefinition>
             <RowDefinition Height="20">
@@ -35,6 +39,9 @@
                     <RowDefinition Height="60">
                         
                     </RowDefinition>
+                    <RowDefinition Height="60">
+
+                    </RowDefinition>
                     <RowDefinition>
 
                     </RowDefinition>
@@ -42,32 +49,28 @@
 
                     </RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="1">
-                    <ItemsControl x:Name="TestAnswer" Background="White">
+                <TextBlock Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding InformationPassQuestion}" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TextQuestion}" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="2" >
+                    <ItemsControl x:Name="TestAnswer" Background="White" ItemsSource="{Binding Properties}">
                         <ItemsControl.Resources>
-                            <DataTemplate DataType="{x:Type local:}">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="100"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Label Content="{Binding Label}" 
-                      IsEnabled="{Binding IsEnabled}"
-                      Grid.Column="0"/>
-                                    <!-- Here based on type need to change the TextBox with ComboBox-->
-                                    <TextBox Text="{Binding Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        Grid.Column="1"
-                        IsEnabled="{Binding IsEnabled}"/>
-                                </Grid>
+                            <DataTemplate DataType="{x:Type loc:TextBoxControl}">
+                                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Grid.Column="1"/>
                             </DataTemplate>
-                            <DataTemplate DataType="{x:Type local:ComboBoxPropertyItemVM}">
-                                <ComboBox/>
+                            <DataTemplate DataType="{x:Type loc:CheckBoxControl}">
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type loc:RadioButtonControl}">
+                                <RadioButton  Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </ItemsControl.Resources>
                     </ItemsControl>
                 </StackPanel>
+                <Button Grid.Row="3" Command="{Binding PassAnswer}" Content="Наступне питання" HorizontalAlignment="Center"   VerticalAlignment="Center"/>
             </Grid>
         </Grid>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="{Binding InformationPassQuestion}" VerticalAlignment="Center"/>
+        <Button Command="{Binding EndTest}" Content="Завершити" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Bottom"/>
     </Grid>
 </UserControl>

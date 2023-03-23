@@ -15,5 +15,7 @@ namespace NETElectronicLearningTool.EF.Model
         public string? Answer { get; set; }
         public bool? TrueOrFalse { get; set; }
         public TestQuestion? TestQuestion { get; set; }
+
+        public IEnumerable<UserAnswer> UserAnswer { get; set; }
     }
 }

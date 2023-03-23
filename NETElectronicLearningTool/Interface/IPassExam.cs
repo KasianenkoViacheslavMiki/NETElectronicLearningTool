@@ -9,8 +9,7 @@ namespace NETElectronicLearningTool.Interface
 {
     public interface IPassExam
     {
-        public Task<bool> PassTest(Test test);
-        //public Task<bool> PassQuestion( test);
-
+        public Task<UserAnswer> PassQuestion(Guid IdTest, UserAnswer userAnswer);
+        public Task<UserAnswerTest> InitPass(Guid testGuid, Guid user);
     }
 }

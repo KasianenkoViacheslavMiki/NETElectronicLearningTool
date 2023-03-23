@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace NETElectronicLearningTool.ViewModels
@@ -14,18 +15,18 @@ namespace NETElectronicLearningTool.ViewModels
     {
         private ViewModelBase _selectedUserControl;
 
-        private int sizeBar;
-        private bool visibleBar;
+        private int sizeBar=30;
+        private bool visibleBar = true;
 
-        public bool VisibleBar
+        public Visibility VisibleBar
         {
             get 
             { 
-                return visibleBar; 
+                return (visibleBar? Visibility.Visible: Visibility.Hidden); 
             }
             set 
-            { 
-                visibleBar = value;
+            {
+                visibleBar = (value == Visibility.Visible ? true:false);
                 OnPropertyChanged(nameof(VisibleBar));
             }
         }
@@ -69,10 +70,14 @@ namespace NETElectronicLearningTool.ViewModels
         {
             if (msg.message == "Hide")
             {
+                VisibleBar = Visibility.Hidden;
+                SizeBar = 0;
                 return;
             }
             if (msg.message == "Show")
             {
+                VisibleBar = Visibility.Visible;
+                SizeBar = 30;
                 return;
             }
         }

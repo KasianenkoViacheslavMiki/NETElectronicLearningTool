@@ -1,23 +1,23 @@
-﻿using NETElectronicLearningTool.UserControls;
+﻿using NETElectronicLearningTool.EF.Model;
 using NETElectronicLearningTool.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace NETElectronicLearningTool.Command.CommandExam
 {
-    public class StartTestCommand : ICommand
+    public class PassAnswerCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
+        PassExamViewModel passExamViewModel;
 
-        ExamViewModel exam;
-
-        public StartTestCommand(ExamViewModel exam)
+        public PassAnswerCommand(PassExamViewModel _passExamViewModel)
         {
-            this.exam = exam;
+            this.passExamViewModel = _passExamViewModel;
         }
 
         public bool CanExecute(object? parameter)
@@ -27,10 +27,8 @@ namespace NETElectronicLearningTool.Command.CommandExam
 
         public void Execute(object? parameter)
         {
-            if (exam.HasSelectedTest)
-            {
-                exam.StartTest();
-            }
+            passExamViewModel.PassQuestion();
+            passExamViewModel.ChangeQuestion(++passExamViewModel.NumberQuestion);
         }
     }
 }

@@ -1,18 +1,34 @@
-﻿using NETElectronicLearningTool.EF;
+﻿using Microsoft.Identity.Client;
+using NETElectronicLearningTool.Command.CommandArticle;
+using NETElectronicLearningTool.Command.CommandExam;
+using NETElectronicLearningTool.EF;
 using NETElectronicLearningTool.EF.Model;
 using NETElectronicLearningTool.ENUM;
 using NETElectronicLearningTool.Interface;
+using NETElectronicLearningTool.ViewModels.Mediator;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace NETElectronicLearningTool.ViewModels
 {
     public class ExamViewModel:ViewModelBase
     {
+        private readonly Guid userStub = Guid.Parse("D0FC5BB2-3EA4-4105-B0CD-765984808188");
+
         IGetTest getTest = new RepositoryTest(new LearningToolContext());
+
+        enum onOffPass
+        {
+            off=0,
+            on=450
+        }
+        private int rowMenuExam = 450;
+        private int rowExam =0 ;
 
         private PassExamViewModel passExam = null;
 
@@ -22,7 +38,49 @@ namespace NETElectronicLearningTool.ViewModels
 
         private Test selectedTest;
 
+        public ICommand StartTest_Begin { get; set; }
+        public ICommand ChangeTest { get; set; }
 
+        public ExamViewModel()
+        {
+            EventSystem.Subscribe<ToggleMessage>(ToggleBar);
+            RowMenuExam = (int)onOffPass.on;
+            RowExam = (int)onOffPass.off;
+            GetGuidAndNameArticle();
+            StartTest_Begin = new StartTestCommand(this);
+            ChangeTest = new ChangeTestCommand(this);
+        }
+        public bool HasSelectedTest
+        {
+            get
+            {
+                return selectedTest != null;
+            }
+        }
+        public int RowMenuExam
+        {
+            get
+            {
+                return rowMenuExam;
+            }
+            set
+            {
+                rowMenuExam = value;
+                OnPropertyChanged(nameof(RowMenuExam));
+            }
+        }
+        public int RowExam
+        {
+            get
+            {
+                return rowExam;
+            }
+            set
+            {
+                rowExam = value;
+                OnPropertyChanged(nameof(RowExam));
+            }
+        }
         public string InformationTest
         {
             get 
@@ -31,7 +89,8 @@ namespace NETElectronicLearningTool.ViewModels
             }
             set 
             {
-                OnPropertyChanged(nameof(PassExam));
+                informationTest = value;
+                OnPropertyChanged(nameof(InformationTest));
             }
         }
 
@@ -76,9 +135,9 @@ namespace NETElectronicLearningTool.ViewModels
         {
             Test testRandom = new Test();
 
-            int countQuestionForExamSingle = SelectedTest.CountQuestionForExamSingle;
-            int countQuestionForExamMany = SelectedTest.CountQuestionForExamMany;
-            int countQuestionForExamText = SelectedTest.CountQuestionForExamText;
+            int? countQuestionForExamSingle = SelectedTest.CountQuestionForExamSingle;
+            int? countQuestionForExamMany = SelectedTest.CountQuestionForExamMany;
+            int? countQuestionForExamText = SelectedTest.CountQuestionForExamText;
 
             int countQuestion = SelectedTest.TestQuestions.Count();
 
@@ -86,15 +145,25 @@ namespace NETElectronicLearningTool.ViewModels
 
             List<TestQuestion> testQuestion = SelectedTest.TestQuestions.ToList();
 
-            randomQuestions.AddRange(RandomQuestion(TypeQuestion.ManyAnswer, countQuestionForExamMany, testQuestion));
-            randomQuestions.AddRange(RandomQuestion(TypeQuestion.SingleAnswer, countQuestionForExamSingle, testQuestion));
-            randomQuestions.AddRange(RandomQuestion(TypeQuestion.TextAnswer, countQuestionForExamText, testQuestion));
+            randomQuestions.AddRange(RandomQuestion(TypeQuestion.ManyAnswer,(int) countQuestionForExamMany, testQuestion));
+            randomQuestions.AddRange(RandomQuestion(TypeQuestion.SingleAnswer, (int)countQuestionForExamSingle, testQuestion));
+            randomQuestions.AddRange(RandomQuestion(TypeQuestion.TextAnswer, (int)countQuestionForExamText, testQuestion));
 
             testRandom.TestQuestions = randomQuestions;
             testRandom.Id = SelectedTest.Id;
 
+            RowMenuExam = (int) onOffPass.off;
+            RowExam = (int) onOffPass.on;
 
-            PassExam = new PassExamViewModel(testRandom);
+            EventSystem.Publish(new ToggleMessage() { message="Hide"});
+            PassExam = new PassExamViewModel(testRandom,userStub);
+
+        }
+
+        public async void SetTest(Guid id)
+        {
+            selectedTest = await getTest.GetTest(id);
+            InformationTest = selectedTest.Name+ " Кількість запитань: "+ (selectedTest.CountQuestionForExamMany+ selectedTest.CountQuestionForExamSingle+ selectedTest.CountQuestionForExamText);
         }
 
         private IEnumerable<TestQuestion> RandomQuestion(TypeQuestion typeQuestion, int countQuestion, List<TestQuestion> testQuestions)
@@ -102,10 +171,13 @@ namespace NETElectronicLearningTool.ViewModels
             Random random = new Random();
 
             List<TestQuestion> filterQuestions = testQuestions.Where(x=>x.Type== typeQuestion).ToList();
+
+            int numberForRandom = filterQuestions.Count();
+
             int countRandom = 0;
             for(int i = 0; i < countQuestion; i++)
             {
-                countRandom = random.Next(0, countQuestion - 1);
+                countRandom = random.Next(0, numberForRandom - 1);
                 yield return filterQuestions[countRandom];
                 filterQuestions.Remove(filterQuestions[countRandom]);
             }
@@ -121,6 +193,15 @@ namespace NETElectronicLearningTool.ViewModels
             }
             ItemsTree = articles;
         }
-
+        public void ToggleBar(ToggleMessage msg)
+        {
+            if (msg.message == "Show")
+            {
+                RowMenuExam = (int)onOffPass.on;
+                RowExam = (int)onOffPass.off;
+                passExam = null;
+                return;
+            }
+        }
     }
 }

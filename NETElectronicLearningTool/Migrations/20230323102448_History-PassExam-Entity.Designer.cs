@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230323102448_History-PassExam-Entity")]
+    partial class HistoryPassExamEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,13 +117,13 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<int?>("CountQuestionForExamMany")
+                    b.Property<int>("CountQuestionForExamMany")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CountQuestionForExamSingle")
+                    b.Property<int>("CountQuestionForExamSingle")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CountQuestionForExamText")
+                    b.Property<int>("CountQuestionForExamText")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -173,10 +176,10 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<Guid?>("IdQuestionAnswer")
+                    b.Property<Guid>("IdQuestionAnswer")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IdUserAnswerTest")
+                    b.Property<Guid>("IdUserAnswerTest")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("TextAnswer")
@@ -195,12 +198,13 @@ namespace NETElectronicLearningTool.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<Guid>("IdTest")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IdTest")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("IdUser")
+                    b.Property<Guid>("IdUser")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("TestId")
@@ -246,11 +250,15 @@ namespace NETElectronicLearningTool.Migrations
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.QuestionAnswer", "QuestionAnswer")
                         .WithMany("UserAnswer")
-                        .HasForeignKey("IdQuestionAnswer");
+                        .HasForeignKey("IdQuestionAnswer")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("NETElectronicLearningTool.EF.Model.UserAnswerTest", "UserAnswerTest")
                         .WithMany("UserAnswers")
-                        .HasForeignKey("IdUserAnswerTest");
+                        .HasForeignKey("IdUserAnswerTest")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("QuestionAnswer");
 
@@ -261,7 +269,9 @@ namespace NETElectronicLearningTool.Migrations
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.User", "User")
                         .WithMany("UserAnswerTests")
-                        .HasForeignKey("IdUser");
+                        .HasForeignKey("IdUser")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("NETElectronicLearningTool.EF.Model.Test", "Test")
                         .WithMany()

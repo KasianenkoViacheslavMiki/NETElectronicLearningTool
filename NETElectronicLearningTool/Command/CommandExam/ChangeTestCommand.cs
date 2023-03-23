@@ -1,5 +1,4 @@
-﻿using NETElectronicLearningTool.UserControls;
-using NETElectronicLearningTool.ViewModels;
+﻿using NETElectronicLearningTool.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +8,12 @@ using System.Windows.Input;
 
 namespace NETElectronicLearningTool.Command.CommandExam
 {
-    public class StartTestCommand : ICommand
+    public class ChangeTestCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
-
         ExamViewModel exam;
 
-        public StartTestCommand(ExamViewModel exam)
+        public ChangeTestCommand(ExamViewModel exam)
         {
             this.exam = exam;
         }
@@ -27,10 +25,11 @@ namespace NETElectronicLearningTool.Command.CommandExam
 
         public void Execute(object? parameter)
         {
-            if (exam.HasSelectedTest)
+            if (parameter == null)
             {
-                exam.StartTest();
+                return;
             }
+            exam.SetTest(((ItemTree)parameter).Id);
         }
     }
 }
