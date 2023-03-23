@@ -1,0 +1,76 @@
+﻿<UserControl x:Class="NETElectronicLearningTool.UserControls.PassExam"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NETElectronicLearningTool.UserControls"
+             xmlns:loc="clr-namespace:NETElectronicLearningTool.ViewModels.ExamControl"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20">
+                
+            </RowDefinition>
+            <RowDefinition Height="{Binding ViewInfo}">
+
+            </RowDefinition>
+            <RowDefinition Height="{Binding Message}">
+
+            </RowDefinition>
+            <RowDefinition Height="20">
+                
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30">
+                    
+                </ColumnDefinition>
+                <ColumnDefinition>
+                    
+                </ColumnDefinition>
+                <ColumnDefinition Width="30">
+
+                </ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60">
+                        
+                    </RowDefinition>
+                    <RowDefinition Height="60">
+
+                    </RowDefinition>
+                    <RowDefinition>
+
+                    </RowDefinition>
+                    <RowDefinition Height="90">
+
+                    </RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding InformationPassQuestion}" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding TextQuestion}" VerticalAlignment="Center"/>
+                <StackPanel Grid.Row="2" >
+                    <ItemsControl x:Name="TestAnswer" Background="White" ItemsSource="{Binding Properties}">
+                        <ItemsControl.Resources>
+                            <DataTemplate DataType="{x:Type loc:TextBoxControl}">
+                                <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                             Grid.Column="1"/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type loc:CheckBoxControl}">
+                                <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                            <DataTemplate DataType="{x:Type loc:RadioButtonControl}">
+                                <RadioButton  Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                            </DataTemplate>
+                        </ItemsControl.Resources>
+                    </ItemsControl>
+                </StackPanel>
+                <Button Grid.Row="3" Command="{Binding PassAnswer}" Content="Наступне питання" HorizontalAlignment="Center"   VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="2" TextWrapping="Wrap" Text="{Binding InformationPassQuestion}" VerticalAlignment="Center"/>
+        <Button Command="{Binding EndTest}" Content="Завершити" HorizontalAlignment="Center"  Grid.Row="2" VerticalAlignment="Bottom"/>
+    </Grid>
+</UserControl>

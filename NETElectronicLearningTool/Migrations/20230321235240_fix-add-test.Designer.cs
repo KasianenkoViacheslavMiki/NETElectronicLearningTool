@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230321235240_fix-add-test")]
+    partial class fixaddtest
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,15 +117,6 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<int?>("CountQuestionForExamMany")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CountQuestionForExamSingle")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CountQuestionForExamText")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -138,9 +132,6 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
-                    b.Property<Guid?>("IdTest")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("Question")
                         .HasColumnType("nvarchar(max)");
 
@@ -148,8 +139,6 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("IdTest");
 
                     b.ToTable("TestQuestions");
                 });
@@ -166,55 +155,6 @@ namespace NETElectronicLearningTool.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.UserAnswer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
-                        .HasDefaultValueSql("NEWID()");
-
-                    b.Property<Guid?>("IdQuestionAnswer")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("IdUserAnswerTest")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("TextAnswer")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdQuestionAnswer");
-
-                    b.HasIndex("IdUserAnswerTest");
-
-                    b.ToTable("UserAnswers");
-                });
-
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.UserAnswerTest", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("IdTest")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("IdUser")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("TestId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdUser");
-
-                    b.HasIndex("TestId");
-
-                    b.ToTable("UserAnswerTests");
-                });
-
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.ArticlePage", b =>
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.Article", "Article")
@@ -227,7 +167,7 @@ namespace NETElectronicLearningTool.Migrations
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.QuestionAnswer", b =>
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.TestQuestion", "TestQuestion")
-                        .WithMany("QuestionAnswers")
+                        .WithMany()
                         .HasForeignKey("TestQuestionId");
 
                     b.Navigation("TestQuestion");
@@ -237,39 +177,11 @@ namespace NETElectronicLearningTool.Migrations
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.Test", "Test")
                         .WithMany("TestQuestions")
-                        .HasForeignKey("IdTest");
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Test");
-                });
-
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.UserAnswer", b =>
-                {
-                    b.HasOne("NETElectronicLearningTool.EF.Model.QuestionAnswer", "QuestionAnswer")
-                        .WithMany("UserAnswer")
-                        .HasForeignKey("IdQuestionAnswer");
-
-                    b.HasOne("NETElectronicLearningTool.EF.Model.UserAnswerTest", "UserAnswerTest")
-                        .WithMany("UserAnswers")
-                        .HasForeignKey("IdUserAnswerTest");
-
-                    b.Navigation("QuestionAnswer");
-
-                    b.Navigation("UserAnswerTest");
-                });
-
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.UserAnswerTest", b =>
-                {
-                    b.HasOne("NETElectronicLearningTool.EF.Model.User", "User")
-                        .WithMany("UserAnswerTests")
-                        .HasForeignKey("IdUser");
-
-                    b.HasOne("NETElectronicLearningTool.EF.Model.Test", "Test")
-                        .WithMany()
-                        .HasForeignKey("TestId");
-
-                    b.Navigation("Test");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.Article", b =>
@@ -277,29 +189,9 @@ namespace NETElectronicLearningTool.Migrations
                     b.Navigation("ArticlePage");
                 });
 
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.QuestionAnswer", b =>
-                {
-                    b.Navigation("UserAnswer");
-                });
-
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.Test", b =>
                 {
                     b.Navigation("TestQuestions");
-                });
-
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.TestQuestion", b =>
-                {
-                    b.Navigation("QuestionAnswers");
-                });
-
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.User", b =>
-                {
-                    b.Navigation("UserAnswerTests");
-                });
-
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.UserAnswerTest", b =>
-                {
-                    b.Navigation("UserAnswers");
                 });
 #pragma warning restore 612, 618
         }

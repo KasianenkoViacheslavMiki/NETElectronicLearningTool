@@ -21,5 +21,11 @@
         <DataTemplate DataType="{x:Type viewmodels:SettingViewModel}">
             <view:Settings/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:ExamViewModel}">
+            <view:Exam/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewmodels:PassExamViewModel}">
+            <view:PassExam/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
