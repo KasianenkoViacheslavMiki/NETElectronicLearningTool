@@ -44,6 +44,7 @@ namespace NETElectronicLearningTool.ViewModels.ExamControl
             get
             {
                 return name;
+                OnPropertyChanged(nameof(Name));
             }
 
         }
@@ -58,6 +59,8 @@ namespace NETElectronicLearningTool.ViewModels.ExamControl
             set
             {
                 isSelected = value;
+                OnPropertyChanged(nameof(IsSelected));
+
             }
         }
 

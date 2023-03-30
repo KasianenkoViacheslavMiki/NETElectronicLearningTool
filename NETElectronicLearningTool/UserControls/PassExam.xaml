@@ -61,8 +61,10 @@
                             <DataTemplate DataType="{x:Type loc:CheckBoxControl}">
                                 <CheckBox Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
+                            
                             <DataTemplate DataType="{x:Type loc:RadioButtonControl}">
-                                <RadioButton  Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+
+                                <RadioButton GroupName="ExamRadioButton" Content="{Binding Name}" IsChecked="{Binding IsSelected, Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                             </DataTemplate>
                         </ItemsControl.Resources>
                     </ItemsControl>
