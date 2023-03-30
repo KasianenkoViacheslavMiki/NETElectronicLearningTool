@@ -56,7 +56,9 @@ namespace NETElectronicLearningTool.ViewModels
             }
             set 
             { 
-                test = value; 
+                test = value;
+                OnPropertyChanged(nameof(Test));
+
             }
         }
         public UserAnswerTest CurrentTest
@@ -138,11 +140,11 @@ namespace NETElectronicLearningTool.ViewModels
                 ballExam = value;
 
                 OnPropertyChanged(nameof(BallExam));
-                if (BallExam == 1)
+                if (value == 1)
                     InformationPassQuestion = "Відповідь вірна, отримано балів " + (int)BallExam;
-                if (BallExam == 0.5)
+                if (value == 0.5)
                     InformationPassQuestion = "Відповідь наполовину вірна, отримано балів " + BallExam.ToString("0.0") +"\nВірні відповіді "+ stringTrueAnswer;
-                if (BallExam == 0)
+                if (value == 0)
                     InformationPassQuestion = "Відповідь невірна, отримано балів " + (int)BallExam + "\nВірні відповіді " + stringTrueAnswer;
             }
         }
@@ -227,7 +229,7 @@ namespace NETElectronicLearningTool.ViewModels
             Properties =baseControls;
         }
 
-		public async void PassQuestion()
+		public async Task PassQuestion()
 		{
             List<QuestionAnswer> trueAnswer = question.QuestionAnswers.Where(x => x.TrueOrFalse == true).ToList();
 

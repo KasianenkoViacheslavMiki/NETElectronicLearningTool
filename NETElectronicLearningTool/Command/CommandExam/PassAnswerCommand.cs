@@ -25,9 +25,9 @@ namespace NETElectronicLearningTool.Command.CommandExam
             return true;
         }
 
-        public void Execute(object? parameter)
+        public async void Execute(object? parameter)
         {
-            passExamViewModel.PassQuestion();
+            await passExamViewModel.PassQuestion();
             passExamViewModel.ChangeQuestion(++passExamViewModel.NumberQuestion);
         }
     }
