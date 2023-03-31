@@ -140,12 +140,7 @@ namespace NETElectronicLearningTool.ViewModels
                 ballExam = value;
 
                 OnPropertyChanged(nameof(BallExam));
-                if (value == 1)
-                    InformationPassQuestion = "Відповідь вірна, отримано балів " + (int)BallExam;
-                if (value == 0.5)
-                    InformationPassQuestion = "Відповідь наполовину вірна, отримано балів " + BallExam.ToString("0.0") +"\nВірні відповіді "+ stringTrueAnswer;
-                if (value == 0)
-                    InformationPassQuestion = "Відповідь невірна, отримано балів " + (int)BallExam + "\nВірні відповіді " + stringTrueAnswer;
+              
             }
         }
 
@@ -200,7 +195,7 @@ namespace NETElectronicLearningTool.ViewModels
             {
                 Message = "1*";
                 ViewInfo = "0";
-                InformationPassQuestion = "Тест був зданий на " + ballExam.ToString("0.0")+ " Правильних відповідей було "+ countTrueAnswers.ToString();
+                InformationPassQuestion = "Остання відповідь була: "+ InformationPassQuestion+"\nТест був зданий на " + ballExam.ToString("0.0")+ " \nПравильних відповідей було "+ countTrueAnswers.ToString();
                 return;
             }
             ObservableCollection<BaseControl> baseControls = new ObservableCollection<BaseControl>();
@@ -271,11 +266,28 @@ namespace NETElectronicLearningTool.ViewModels
             }
             else if (question.Type == TypeQuestion.TextAnswer)
             {
-                countTrueAnswer = question.QuestionAnswers.Where(x => (x.TrueOrFalse == true && x.Answer == answers[0].Item1)).Count();
+                countTrueAnswer = question.QuestionAnswers.Where(x => (x.TrueOrFalse == true && x.Answer.ToUpper() == answers[0].Item1.ToUpper())).Count();
                 userAnswer.IdUserAnswerTest = CurrentTest.Id;
                 userAnswer.TextAnswer = answers[0].Item1;
                 await passExam.PassQuestion(Test.Id, userAnswer);
                 BallExam += countTrueAnswer *1;
+            }
+
+            if (countTrueAnswer == 0)
+            {
+                InformationPassQuestion = "Відповідь невірна, отримано балів " + (countTrueAnswer * 0.5).ToString("0.0") + "\nВірні відповіді " + stringTrueAnswer;
+            }
+            else if (question.Type == TypeQuestion.ManyAnswer)
+            {
+                if (countTrueAnswer == 2)
+                    InformationPassQuestion = "Відповідь вірна, отримано балів " + countTrueAnswer * 0.5;
+                else
+                    InformationPassQuestion = "Відповідь наполовину вірна, отримано балів " + (countTrueAnswer * 0.5).ToString("0.0") + "\nВірні відповіді " + stringTrueAnswer;
+            }
+            else if (question.Type == TypeQuestion.SingleAnswer)
+            {
+                if (countTrueAnswer == 1)
+                    InformationPassQuestion = "Відповідь вірна, отримано балів " + countTrueAnswer * 1;
             }
             countTrueAnswers += countTrueAnswer;
         }
