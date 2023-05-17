@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230517210841_Add_USer_ID")]
+    partial class AddUSerID
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,10 +73,18 @@ namespace NETElectronicLearningTool.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<Guid?>("IdUser")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ElementLearning");
                 });
@@ -88,17 +99,17 @@ namespace NETElectronicLearningTool.Migrations
                     b.Property<Guid?>("IdElementLearning")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IdUser")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<float?>("LvlKnowledge")
                         .HasColumnType("real");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdElementLearning");
 
-                    b.HasIndex("IdUser");
+                    b.HasIndex("UserId");
 
                     b.ToTable("LevelKnowledge");
                 });
@@ -284,19 +295,26 @@ namespace NETElectronicLearningTool.Migrations
                     b.Navigation("Article");
                 });
 
+            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.ElementLearning", b =>
+                {
+                    b.HasOne("NETElectronicLearningTool.EF.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.LevelKnowledge", b =>
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.ElementLearning", "ElementLearning")
                         .WithMany("LevelKnowledges")
                         .HasForeignKey("IdElementLearning");
 
-                    b.HasOne("NETElectronicLearningTool.EF.Model.User", "User")
+                    b.HasOne("NETElectronicLearningTool.EF.Model.User", null)
                         .WithMany("LevelKnowledges")
-                        .HasForeignKey("IdUser");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("ElementLearning");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.QuestionAnswer", b =>

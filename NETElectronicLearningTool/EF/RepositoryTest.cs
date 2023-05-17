@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NETElectronicLearningTool.EF
 {
-    public class RepositoryTest : IGetTest, IPassExam
+    public class RepositoryTest : IGetTest, IPassExam, ISetLevel
     {
         LearningToolContext _context;
 
@@ -45,6 +45,20 @@ namespace NETElectronicLearningTool.EF
             var l = await _context.UserAnswerTests.AddAsync(userAnswerTest);
             await _context.SaveChangesAsync();
             return await _context.UserAnswerTests.FirstAsync(x => x.Id == userAnswerTest.Id);
+        }
+
+        public async Task<LevelKnowledge> SetLevelKnowledge(Guid? IdElementLearning,Guid? IdUser, float level)
+        {
+            LevelKnowledge levelKnowledge = new LevelKnowledge
+            {
+                Id = Guid.NewGuid(),
+                IdElementLearning = IdElementLearning,
+                IdUser = IdUser,
+                LvlKnowledge = level
+            };
+            await _context.LevelKnowledge.AddAsync(levelKnowledge);
+            await _context.SaveChangesAsync();
+            return levelKnowledge;
         }
     }
 }

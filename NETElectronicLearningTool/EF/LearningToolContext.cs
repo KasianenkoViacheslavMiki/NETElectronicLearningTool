@@ -49,7 +49,28 @@ namespace NETElectronicLearningTool.EF
                 .Property(x => x.Id)
                 .HasDefaultValueSql("NEWID()");
 
-     
+            modelBuilder.Entity<ElementLearning>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
+
+            modelBuilder.Entity<LevelKnowledge>()
+                .Property(x => x.Id)
+                .HasDefaultValueSql("NEWID()");
+
+            modelBuilder.Entity<ElementLearning>()
+                .HasMany<LevelKnowledge>(x => x.LevelKnowledges)
+                .WithOne(x => x.ElementLearning)
+                .HasForeignKey(x => x.IdElementLearning);
+
+            modelBuilder.Entity<ElementLearning>()
+                .HasMany<TestQuestion>(x => x.TestQuestions)
+                .WithOne(x => x.ElementLearning)
+                .HasForeignKey(x => x.IdElementLearning);
+
+            modelBuilder.Entity<Test>()
+                .HasMany<TestQuestion>(x => x.TestQuestions)
+                .WithOne(x => x.Test)
+                .HasForeignKey(x => x.IdTest);
 
             modelBuilder.Entity<Test>()
                 .HasMany<TestQuestion>(x => x.TestQuestions)
@@ -63,6 +84,10 @@ namespace NETElectronicLearningTool.EF
 
             modelBuilder.Entity<User>()
                 .HasMany<UserAnswerTest>(x => x.UserAnswerTests)
+                .WithOne(x => x.User)
+                .HasForeignKey(x => x.IdUser);
+            modelBuilder.Entity<User>()
+                .HasMany<LevelKnowledge>(x => x.LevelKnowledges)
                 .WithOne(x => x.User)
                 .HasForeignKey(x => x.IdUser);
 
@@ -85,5 +110,7 @@ namespace NETElectronicLearningTool.EF
         public DbSet<User> Users { get; set; }
         public DbSet<UserAnswer> UserAnswers { get; set; }
         public DbSet<UserAnswerTest> UserAnswerTests { get; set; }
+        public DbSet<ElementLearning> ElementLearning { get; set; }
+        public DbSet<LevelKnowledge> LevelKnowledge { get; set; }
     }
 }

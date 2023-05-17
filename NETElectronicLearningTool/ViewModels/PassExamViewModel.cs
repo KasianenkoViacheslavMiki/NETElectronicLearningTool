@@ -22,8 +22,8 @@ namespace NETElectronicLearningTool.ViewModels
 		ICreateControl createControl;
 
         IPassExam passExam = new RepositoryTest(new LearningToolContext());
+        ISetLevel setLevel = new RepositoryTest(new LearningToolContext());
 
-        
         private ObservableCollection<BaseControl> properties;
 
         private UserAnswerTest currentTest;
@@ -251,6 +251,7 @@ namespace NETElectronicLearningTool.ViewModels
                 userAnswer.IdQuestionAnswer = Guid.Parse(answers[0].Item1);
                 await passExam.PassQuestion(Test.Id, userAnswer);
                 BallExam += countTrueAnswer * 1;
+                await setLevel.SetLevelKnowledge(question.IdElementLearning, CurrentTest.IdUser, (float)(countTrueAnswer * 1));
             }
             else if (question.Type == TypeQuestion.ManyAnswer)
             {
@@ -262,6 +263,7 @@ namespace NETElectronicLearningTool.ViewModels
                     manyUserAnswer.IdQuestionAnswer = Guid.Parse(answer.Item1);
                     await passExam.PassQuestion(Test.Id, manyUserAnswer);
                 }
+                await setLevel.SetLevelKnowledge(question.IdElementLearning, CurrentTest.IdUser, (float)(countTrueAnswer * 0.50));
                 BallExam += countTrueAnswer * 0.5;
             }
             else if (question.Type == TypeQuestion.TextAnswer)
@@ -271,6 +273,7 @@ namespace NETElectronicLearningTool.ViewModels
                 userAnswer.TextAnswer = answers[0].Item1;
                 await passExam.PassQuestion(Test.Id, userAnswer);
                 BallExam += countTrueAnswer *1;
+                await setLevel.SetLevelKnowledge(question.IdElementLearning, CurrentTest.IdUser, (float)(countTrueAnswer * 1));
             }
 
             if (countTrueAnswer == 0)

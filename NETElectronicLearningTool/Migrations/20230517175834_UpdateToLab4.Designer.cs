@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230517175834_UpdateToLab4")]
+    partial class UpdateToLab4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +81,7 @@ namespace NETElectronicLearningTool.Migrations
                     b.ToTable("ElementLearning");
                 });
 
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.LevelKnowledge", b =>
+            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.LevelKnowladge", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -88,19 +91,11 @@ namespace NETElectronicLearningTool.Migrations
                     b.Property<Guid?>("IdElementLearning")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IdUser")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<float?>("LvlKnowledge")
-                        .HasColumnType("real");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdElementLearning");
 
-                    b.HasIndex("IdUser");
-
-                    b.ToTable("LevelKnowledge");
+                    b.ToTable("LevelKnowladge");
                 });
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.MethodDiscription", b =>
@@ -218,7 +213,7 @@ namespace NETElectronicLearningTool.Migrations
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float?>("WishsLevelKnowledge")
+                    b.Property<float?>("WishsLevelKnowladge")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -284,19 +279,13 @@ namespace NETElectronicLearningTool.Migrations
                     b.Navigation("Article");
                 });
 
-            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.LevelKnowledge", b =>
+            modelBuilder.Entity("NETElectronicLearningTool.EF.Model.LevelKnowladge", b =>
                 {
                     b.HasOne("NETElectronicLearningTool.EF.Model.ElementLearning", "ElementLearning")
-                        .WithMany("LevelKnowledges")
+                        .WithMany("LevelKnowladges")
                         .HasForeignKey("IdElementLearning");
 
-                    b.HasOne("NETElectronicLearningTool.EF.Model.User", "User")
-                        .WithMany("LevelKnowledges")
-                        .HasForeignKey("IdUser");
-
                     b.Navigation("ElementLearning");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.QuestionAnswer", b =>
@@ -360,7 +349,7 @@ namespace NETElectronicLearningTool.Migrations
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.ElementLearning", b =>
                 {
-                    b.Navigation("LevelKnowledges");
+                    b.Navigation("LevelKnowladges");
 
                     b.Navigation("TestQuestions");
                 });
@@ -382,8 +371,6 @@ namespace NETElectronicLearningTool.Migrations
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.User", b =>
                 {
-                    b.Navigation("LevelKnowledges");
-
                     b.Navigation("UserAnswerTests");
                 });
 
