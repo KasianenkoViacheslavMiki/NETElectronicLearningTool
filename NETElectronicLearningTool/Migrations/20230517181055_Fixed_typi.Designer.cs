@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NETElectronicLearningTool.EF;
 
@@ -11,9 +12,11 @@ using NETElectronicLearningTool.EF;
 namespace NETElectronicLearningTool.Migrations
 {
     [DbContext(typeof(LearningToolContext))]
-    partial class LearningToolContextModelSnapshot : ModelSnapshot
+    [Migration("20230517181055_Fixed_typi")]
+    partial class Fixedtypi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,17 +91,12 @@ namespace NETElectronicLearningTool.Migrations
                     b.Property<Guid?>("IdElementLearning")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("IdUser")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<float?>("LvlKnowledge")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdElementLearning");
-
-                    b.HasIndex("IdUser");
 
                     b.ToTable("LevelKnowledge");
                 });
@@ -290,13 +288,7 @@ namespace NETElectronicLearningTool.Migrations
                         .WithMany("LevelKnowledges")
                         .HasForeignKey("IdElementLearning");
 
-                    b.HasOne("NETElectronicLearningTool.EF.Model.User", "User")
-                        .WithMany("LevelKnowledges")
-                        .HasForeignKey("IdUser");
-
                     b.Navigation("ElementLearning");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.QuestionAnswer", b =>
@@ -382,8 +374,6 @@ namespace NETElectronicLearningTool.Migrations
 
             modelBuilder.Entity("NETElectronicLearningTool.EF.Model.User", b =>
                 {
-                    b.Navigation("LevelKnowledges");
-
                     b.Navigation("UserAnswerTests");
                 });
 
